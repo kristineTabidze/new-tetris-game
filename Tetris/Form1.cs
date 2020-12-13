@@ -70,7 +70,7 @@ namespace Tetris
                         Invalidate();
                     }
                     break;
-                case Keys.Down: //cursor down event
+                case Keys.Down: //keyboard down event
 
                     if (!MapController.IsIntersects())
                     {
@@ -80,7 +80,7 @@ namespace Tetris
                         Invalidate();
                     }
                     break;
-                case Keys.Up: //cursor up event
+                case Keys.Up: //keyboard up event
 
                     if (!MapController.IsIntersects())
                     {
@@ -142,7 +142,22 @@ namespace Tetris
                     break;
             }
 
+            if (e.Delta > 0 || e.Delta < 0) //mouse wheel up  /down
+            {
+                if (!MapController.IsIntersects())
+                {
+                    MapController.ResetArea();
+                    MapController.currentShape.RotateShape();
+                    MapController.Merge();
+                    Invalidate();
+                }
+            }
+
         }
+
+        //add event on mouse wheel up/down
+
+    
 
 
         private void update(object sender, EventArgs e)
