@@ -17,7 +17,9 @@ namespace Tetris
         
         
         string playerName;
-        
+        bool isClickedOnFillBoard = false;
+
+
         public Form1()
         {
             InitializeComponent();
@@ -60,15 +62,8 @@ namespace Tetris
         {
             switch (e.KeyCode)
             {
-                case Keys.A:
-
-                    if (!MapController.IsIntersects())
-                    {
-                        MapController.ResetArea();
-                        MapController.currentShape.RotateShapeCcw();
-                        MapController.Merge();
-                        Invalidate();
-                    }
+                case Keys.C:
+                    isClickedOnFillBoard = true;
                     break;
                 case Keys.Down: //keyboard down event
 
@@ -189,6 +184,12 @@ namespace Tetris
             MapController.DrawGrid(e.Graphics);
             MapController.DrawMap(e.Graphics);
             MapController.ShowNextShape(e.Graphics);
+            if (isClickedOnFillBoard)
+            {
+                
+                MapController.FillArea(e.Graphics);
+                isClickedOnFillBoard = false;
+            }
         }
 
         private void OnPauseButtonClick(object sender, EventArgs e)

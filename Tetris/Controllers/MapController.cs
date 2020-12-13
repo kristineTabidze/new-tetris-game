@@ -103,6 +103,10 @@ namespace Tetris.Controllers
                     {
                         e.FillRectangle(Brushes.LimeGreen, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
+                    if (map[i, j] == 8) //if pressed c keyboard
+                    {
+                        e.FillRectangle(Brushes.LimeGreen, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                    }
                 }
             }
         }
@@ -121,11 +125,13 @@ namespace Tetris.Controllers
 
         public static void SliceMap(Label label1,Label label2)
         {
+            Task.Delay(1000).Wait();
             int count = 0;
             int curRemovedLines = 0;
             for (int i = 0; i < rows; i++)
             {
                 count = 0;
+
                 for (int j = 0; j < columns; j++)
                 {
                     if (map[i, j] != 0)
@@ -133,6 +139,7 @@ namespace Tetris.Controllers
                 }
                 if (count == columns)
                 {
+
                     curRemovedLines++;
                    
                     for (int k = i; k >= 1; k--)
@@ -249,6 +256,21 @@ namespace Tetris.Controllers
                         {
                             map[i, j] = 0;
                         }
+                    }
+                }
+            }
+        }
+
+        public static void FillArea(Graphics e)
+        {
+           
+            for (int i = 4; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    if (map[i,j] == 0 )
+                    {
+                        map[i, j] = 8;
                     }
                 }
             }

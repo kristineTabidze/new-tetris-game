@@ -1,4 +1,3 @@
-New user |0
 kristne|100
 kr|200
 Ioseb|2350
@@ -10,3 +9,7 @@ John|3400
 kong|0
 lambda|0
 kappa|450
+dd|200
+q|40250
+k|5300
+New user |5150
