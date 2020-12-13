@@ -21,8 +21,8 @@ namespace Tetris
         public Form1()
         {
             InitializeComponent();
-            //if (!File.Exists(RecordsController.recordPath))
-                //File.Create(RecordsController.recordPath);
+            if (!File.Exists(RecordsController.recordPath))
+                File.Create(RecordsController.recordPath);
             playerName = Microsoft.VisualBasic.Interaction.InputBox("Enter your name","User settings","New user ");
             if(playerName == "")
             {
@@ -36,7 +36,7 @@ namespace Tetris
 
         public void Init()
         {
-            //RecordsController.ShowRecords(label3);
+            RecordsController.ShowRecords(label3);
             this.Text = "Tetris: current user - " + playerName;
             MapController.size = 25;
             MapController.score = 0;
@@ -156,10 +156,7 @@ namespace Tetris
         }
 
         //add event on mouse wheel up/down
-
-    
-
-
+        
         private void update(object sender, EventArgs e)
         {
             MapController.ResetArea();
