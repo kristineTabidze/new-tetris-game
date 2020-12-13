@@ -1,3 +1,5 @@
 New user |0
 kristne|100
 kr|200
+kk|0
+ფფფ|219950

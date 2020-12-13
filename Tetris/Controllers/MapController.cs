@@ -146,8 +146,11 @@ namespace Tetris.Controllers
             }
 
             if (curRemovedLines > 0)
-                score += curRemovedLines * 100 + (curRemovedLines - 1) * 50; //change score
-
+            {
+                int level = curRemovedLines / 10 + 1; //current level
+                score += curRemovedLines * 100 * level + (curRemovedLines - 1) * 50 * level; //change score according to level
+            }
+         
 
             linesRemoved += curRemovedLines;
 
@@ -251,6 +254,19 @@ namespace Tetris.Controllers
                     }
                 }
             }
+        }
+
+        public static void FillArea(Graphics e)
+        {
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    e.FillRectangle(Brushes.Pink, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                }
+            }
+           linesRemoved = 18;
+           score += linesRemoved * 100  + (linesRemoved - 1) * 50; //change score according to level
         }
 
     }

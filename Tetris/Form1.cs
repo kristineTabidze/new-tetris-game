@@ -17,6 +17,7 @@ namespace Tetris
         
         
         string playerName;
+        bool isClickedOnFillBoard = false;
         
         public Form1()
         {
@@ -60,16 +61,12 @@ namespace Tetris
         {
             switch (e.KeyCode)
             {
-                case Keys.A:
 
-                    if (!MapController.IsIntersects())
-                    {
-                        MapController.ResetArea();
-                        MapController.currentShape.RotateShape();
-                        MapController.Merge();
-                        Invalidate();
-                    }
+                case Keys.M:
+                    isClickedOnFillBoard = true;
                     break;
+
+
                 case Keys.Down: //keyboard down event
 
                     if (!MapController.IsIntersects())
@@ -78,6 +75,7 @@ namespace Tetris
                         MapController.currentShape.RotateShape();
                         MapController.Merge();
                         Invalidate();
+                        //rotate differently
                     }
                     break;
                 case Keys.Up: //keyboard up event
@@ -142,20 +140,11 @@ namespace Tetris
                     break;
             }
 
-            if (e.Delta > 0 || e.Delta < 0) //mouse wheel up  /down
-            {
-                if (!MapController.IsIntersects())
-                {
-                    MapController.ResetArea();
-                    MapController.currentShape.RotateShape();
-                    MapController.Merge();
-                    Invalidate();
-                }
-            }
+            
 
         }
 
-        //add event on mouse wheel up/down
+
         
         private void update(object sender, EventArgs e)
         {
@@ -189,6 +178,10 @@ namespace Tetris
             MapController.DrawGrid(e.Graphics);
             MapController.DrawMap(e.Graphics);
             MapController.ShowNextShape(e.Graphics);
+            if (isClickedOnFillBoard)
+            {
+                MapController.FillArea(e.Graphics);
+            }
         }
 
         private void OnPauseButtonClick(object sender, EventArgs e)
@@ -225,5 +218,6 @@ namespace Tetris
         }
 
 
+       
     }
 }
