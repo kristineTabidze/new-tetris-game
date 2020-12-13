@@ -39,7 +39,7 @@ namespace Tetris.Controllers
         {
             List<string> recordsArray = new List<string>(LoadRecords());
 
-            for (int i = 0; i < recordsArray.Count - 1; ++i)//отсортируем рекорды по очкам
+            for (int i = 0; i < recordsArray.Count - 1; ++i)
             {
                 string str = recordsArray[i];
                 string strNext = recordsArray[i + 1];
@@ -56,13 +56,13 @@ namespace Tetris.Controllers
 
             }
 
-            label3.Text = "Таблица рекордов";
+            label3.Text = "Timetable records";
             foreach (var str in recordsArray)
             {
                 string[] args = str.Split('|');
 
                 label3.Text += "\n";
-                label3.Text += "Игрок " + args[0] + " : " + args[1];
+                label3.Text += "User " + args[0] + " : " + args[1];
 
             }
         }
