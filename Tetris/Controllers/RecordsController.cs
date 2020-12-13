@@ -66,7 +66,7 @@ namespace Tetris.Controllers
 
     public class RecordItem : IComparable<RecordItem>
     {
-        public string UserName{get; set;}
+        public string UserName{ get; set; }
         public int Score { get; set; }
 
         public RecordItem()

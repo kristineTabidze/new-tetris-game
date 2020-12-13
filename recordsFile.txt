@@ -13,3 +13,5 @@ dd|200
 q|40250
 k|5300
 New user |246000
+Ikiki|30500
+sddsds|0

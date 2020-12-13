@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tetris.Controllers;
 
@@ -28,7 +21,7 @@ namespace Tetris
             playerName = Microsoft.VisualBasic.Interaction.InputBox("Enter your name","User settings","New user ");
             if(playerName == "")
             {
-                playerName = "New user";
+                playerName = "Anonymous";
             }
             this.KeyUp += new KeyEventHandler(keyFunc);
             this.MouseClick += new MouseEventHandler(mouseFunction);
@@ -44,7 +37,7 @@ namespace Tetris
             MapController.score = 0;
             MapController.linesRemoved = 0;
             MapController.currentShape = new Shape(3, 0);
-            MapController.Interval = 500;
+            MapController.Interval = 300;
             label1.Text = "Score: " + MapController.score;
             label2.Text = "Lines: " + MapController.linesRemoved;
 
@@ -192,7 +185,7 @@ namespace Tetris
             }
         }
 
-        private void OnPauseButtonClick(object sender, EventArgs e)
+        private void OnStripPauseClick(object sender, EventArgs e)
         {
             var pressedButton = sender as ToolStripMenuItem;
             if (timer1.Enabled)
@@ -207,7 +200,7 @@ namespace Tetris
             }
         }
 
-        private void OnAgainButtonClick(object sender, EventArgs e)
+        private void OnStripRestartClick(object sender, EventArgs e)
         {
             timer1.Tick -= new EventHandler(update);
             timer1.Stop();
@@ -216,15 +209,36 @@ namespace Tetris
         }
 
 
-        private void OnInfoPressed(object sender, EventArgs e)
+        private void OnStripReferenceClick(object sender, EventArgs e)
         {
             string infoString = "";
-            infoString = "To move the block use left/right arrow keys .\n";
-            infoString += "To rotate the block use up/down arrow keys .\n";
-            infoString += "To accelerate use space bar .\n";
+            infoString = "To move the block use left/right arrow keys\n";
+            infoString += "To rotate the block use up/down arrow keys\n";
+            infoString += "To accelerate the block use spacebar\n";
             MessageBox.Show(infoString,"Reference");
         }
 
+        private void OnPauseButtonClick(object sender, EventArgs e)
+        {
+            var pressedButton = sender as Button;
+            if (timer1.Enabled)
+            {
+                pressedButton.Text = "Continue";
+                timer1.Stop();
+            }
+            else
+            {
+                pressedButton.Text = "Pause";
+                timer1.Start();
+            }
+        }
 
+        private void OnRestartButtonClick(object sender, EventArgs e)
+        {
+            timer1.Tick -= new EventHandler(update);
+            timer1.Stop();
+            MapController.ClearMap();
+            Init();
+        }
     }
 }

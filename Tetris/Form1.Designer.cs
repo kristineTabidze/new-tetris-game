@@ -32,8 +32,10 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pauseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label3 = new System.Windows.Forms.Label();
             this.referenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label3 = new System.Windows.Forms.Label();
+            this.Pause = new System.Windows.Forms.Button();
+            this.Restart_Button = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,22 +76,29 @@
             this.restartToolStripMenuItem,
             this.referenceToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
-            this.menuToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
             // 
             // pauseToolStripMenuItem
             // 
             this.pauseToolStripMenuItem.Name = "pauseToolStripMenuItem";
-            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pauseToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.pauseToolStripMenuItem.Text = "Pause";
-            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.OnPauseButtonClick);
+            this.pauseToolStripMenuItem.Click += new System.EventHandler(this.OnStripPauseClick);
             // 
             // restartToolStripMenuItem
             // 
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.restartToolStripMenuItem.Text = "Restart";
-            this.restartToolStripMenuItem.Click += new System.EventHandler(this.OnAgainButtonClick);
+            this.restartToolStripMenuItem.Click += new System.EventHandler(this.OnStripRestartClick);
+            // 
+            // referenceToolStripMenuItem
+            // 
+            this.referenceToolStripMenuItem.Name = "referenceToolStripMenuItem";
+            this.referenceToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.referenceToolStripMenuItem.Text = "Reference";
+            this.referenceToolStripMenuItem.Click += new System.EventHandler(this.OnStripReferenceClick);
             // 
             // label3
             // 
@@ -100,18 +109,33 @@
             this.label3.TabIndex = 3;
             this.label3.Text = "label3";
             // 
-            // referenceToolStripMenuItem
+            // Pause
             // 
-            this.referenceToolStripMenuItem.Name = "referenceToolStripMenuItem";
-            this.referenceToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.referenceToolStripMenuItem.Text = "Reference";
-            this.referenceToolStripMenuItem.Click += new System.EventHandler(this.OnInfoPressed);
+            this.Pause.Location = new System.Drawing.Point(309, 405);
+            this.Pause.Name = "Pause";
+            this.Pause.Size = new System.Drawing.Size(65, 23);
+            this.Pause.TabIndex = 4;
+            this.Pause.Text = "Pause";
+            this.Pause.UseVisualStyleBackColor = true;
+            this.Pause.Click += new System.EventHandler(this.OnPauseButtonClick);
+            // 
+            // Restart_Button
+            // 
+            this.Restart_Button.Location = new System.Drawing.Point(380, 405);
+            this.Restart_Button.Name = "Restart_Button";
+            this.Restart_Button.Size = new System.Drawing.Size(65, 23);
+            this.Restart_Button.TabIndex = 5;
+            this.Restart_Button.Text = "Restart";
+            this.Restart_Button.UseVisualStyleBackColor = true;
+            this.Restart_Button.Click += new System.EventHandler(this.OnRestartButtonClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 561);
+            this.Controls.Add(this.Restart_Button);
+            this.Controls.Add(this.Pause);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -139,6 +163,8 @@
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem referenceToolStripMenuItem;
+        private System.Windows.Forms.Button Pause;
+        private System.Windows.Forms.Button Restart_Button;
     }
 }
 
