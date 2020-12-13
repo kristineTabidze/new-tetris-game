@@ -29,6 +29,8 @@ namespace Tetris
                 playerName = "New user";
             }
             this.KeyUp += new KeyEventHandler(keyFunc);
+            this.MouseClick += new MouseEventHandler(mouseFunction);
+
             Init();
         }
 
@@ -68,6 +70,26 @@ namespace Tetris
                         Invalidate();
                     }
                     break;
+                case Keys.Down: //cursor down event
+
+                    if (!MapController.IsIntersects())
+                    {
+                        MapController.ResetArea();
+                        MapController.currentShape.RotateShape();
+                        MapController.Merge();
+                        Invalidate();
+                    }
+                    break;
+                case Keys.Up: //cursor up event
+
+                    if (!MapController.IsIntersects())
+                    {
+                        MapController.ResetArea();
+                        MapController.currentShape.RotateShape();
+                        MapController.Merge();
+                        Invalidate();
+                    }
+                    break;
                 case Keys.Space:
                     timer1.Interval = 10;
                     break;
@@ -90,9 +112,39 @@ namespace Tetris
                     }
                     break;
             }
+
         }
 
-        
+        // add events after click mouse right/left button
+
+        private void mouseFunction(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                
+                case MouseButtons.Right:
+                    if (!MapController.CollideHor(1))
+                    {
+                        MapController.ResetArea();
+                        MapController.currentShape.MoveRight();
+                        MapController.Merge();
+                        Invalidate();
+                    }
+                    break;
+                case MouseButtons.Left:
+                    if (!MapController.CollideHor(-1))
+                    {
+                        MapController.ResetArea();
+                        MapController.currentShape.MoveLeft();
+                        MapController.Merge();
+                        Invalidate();
+                    }
+                    break;
+            }
+
+        }
+
+
         private void update(object sender, EventArgs e)
         {
             MapController.ResetArea();

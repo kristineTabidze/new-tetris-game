@@ -12,10 +12,13 @@ namespace Tetris.Controllers
     {
         public static Shape currentShape;
         public static int size;
-        public static int[,] map = new int[16, 8];
+        private static int rows = 18;
+        private static int columns = 10;
+        public static int[,] map = new int[rows, columns];
         public static int linesRemoved;
         public static int score;
         public static int Interval;
+       
         public static void ShowNextShape(Graphics e)
         {
             for (int i = 0; i < currentShape.sizeNextMatrix; i++)
@@ -24,31 +27,31 @@ namespace Tetris.Controllers
                 {
                     if (currentShape.nextMatrix[i, j] == 1)
                     {
-                        e.FillRectangle(Brushes.Red, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Red, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                     if (currentShape.nextMatrix[i, j] == 2)
                     {
-                        e.FillRectangle(Brushes.Yellow, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Yellow, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                     if (currentShape.nextMatrix[i, j] == 3)
                     {
-                        e.FillRectangle(Brushes.Green, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Green, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                     if (currentShape.nextMatrix[i, j] == 4)
                     {
-                        e.FillRectangle(Brushes.Blue, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Blue, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                     if (currentShape.nextMatrix[i, j] == 5)
                     {
-                        e.FillRectangle(Brushes.Purple, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Purple, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                     if (currentShape.nextMatrix[i, j] == 6)
                     {
-                        e.FillRectangle(Brushes.Aquamarine, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Aquamarine, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                     if (currentShape.nextMatrix[i, j] == 7)
                     {
-                        e.FillRectangle(Brushes.ForestGreen, new Rectangle(300 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.LimeGreen, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                 }
             }
@@ -56,9 +59,9 @@ namespace Tetris.Controllers
 
         public static void ClearMap()
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     map[i, j] = 0;
                 }
@@ -67,9 +70,9 @@ namespace Tetris.Controllers
 
         public static void DrawMap(Graphics e)
         {
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     if (map[i, j] == 1)
                     {
@@ -97,7 +100,7 @@ namespace Tetris.Controllers
                     }
                     if (map[i, j] == 7)
                     {
-                        e.FillRectangle(Brushes.ForestGreen, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.LimeGreen, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                 }
             }
@@ -105,13 +108,13 @@ namespace Tetris.Controllers
 
         public static void DrawGrid(Graphics g)
         {
-            for (int i = 0; i <= 16; i++)
+            for (int i = 0; i <= rows; i++)
             {
-                g.DrawLine(Pens.Black, new Point(50, 50 + i * size), new Point(50 + 8 * size, 50 + i * size));
+                g.DrawLine(Pens.Black, new Point(50, 50 + i * size), new Point(50 + columns * size, 50 + i * size));
             }
-            for (int i = 0; i <= 8; i++)
+            for (int i = 0; i <= columns; i++)
             {
-                g.DrawLine(Pens.Black, new Point(50 + i * size, 50), new Point(50 + i * size, 50 + 16 * size));
+                g.DrawLine(Pens.Black, new Point(50 + i * size, 50), new Point(50 + i * size, 50 + rows * size));
             }
         }
 
@@ -119,20 +122,20 @@ namespace Tetris.Controllers
         {
             int count = 0;
             int curRemovedLines = 0;
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < rows; i++)
             {
                 count = 0;
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < columns; j++)
                 {
                     if (map[i, j] != 0)
                         count++;
                 }
-                if (count == 8)
+                if (count == columns)
                 {
                     curRemovedLines++;
                     for (int k = i; k >= 1; k--)
                     {
-                        for (int o = 0; o < 8; o++)
+                        for (int o = 0; o < columns; o++)
                         {
                             map[k, o] = map[k - 1, o];
                         }
@@ -161,7 +164,7 @@ namespace Tetris.Controllers
             {
                 for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
                 {
-                    if (j >= 0 && j <= 7)
+                    if (j >= 0 && j < columns)
                     {
                         if (map[i, j] != 0 && currentShape.matrix[i - currentShape.y, j - currentShape.x] == 0)
                             return true;
@@ -191,7 +194,7 @@ namespace Tetris.Controllers
                 {
                     if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                     {
-                        if (i + 1 == 16)
+                        if (i + 1 == rows)
                             return true;
                         if (map[i + 1, j] != 0)
                         {
@@ -211,7 +214,7 @@ namespace Tetris.Controllers
                 {
                     if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                     {
-                        if (j + 1 * dir > 7 || j + 1 * dir < 0)
+                        if (j + 1 * dir > columns - 1 || j + 1 * dir < 0)
                             return true;
 
                         if (map[i, j + 1 * dir] != 0)
@@ -235,7 +238,7 @@ namespace Tetris.Controllers
             {
                 for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
                 {
-                    if (i >= 0 && j >= 0 && i < 16 && j < 8)
+                    if (i >= 0 && j >= 0 && i < rows && j < columns)
                     {
                         if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
                         {
