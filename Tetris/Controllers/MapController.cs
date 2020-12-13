@@ -153,7 +153,7 @@ namespace Tetris.Controllers
 
             linesRemoved += curRemovedLines;
 
-            if (linesRemoved % 10 == 0)
+            if (linesRemoved % 10 == 0 && linesRemoved > 0)
             {
                 if (Interval > 30)
                     Interval -= Interval * 25 / 100; //fall 25% faster than the previous level
