@@ -60,9 +60,22 @@ namespace Tetris
 
         private void keyFunc(object sender, KeyEventArgs e)
         {
+
+            if (e.Control && e.KeyCode == Keys.P)
+            {
+                // pause the game
+                timer1.Stop();
+            }
+
+            if (e.Control && e.KeyCode == Keys.G)
+            {
+                // resume the game
+                timer1.Start();
+            }
+
             switch (e.KeyCode)
             {
-                case Keys.C:
+                case Keys.Home:
                     isClickedOnFillBoard = true;
                     break;
                 case Keys.Down: //keyboard down event
@@ -106,6 +119,8 @@ namespace Tetris
                         Invalidate();
                     }
                     break;
+
+                   
             }
 
         }
