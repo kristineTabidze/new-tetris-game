@@ -18,7 +18,8 @@ namespace Tetris.Controllers
         public static int linesRemoved;
         public static int score;
         public static int Interval;
-       
+        public static int level;
+
         public static void ShowNextShape(Graphics e)
         {
             for (int i = 0; i < currentShape.sizeNextMatrix; i++)
@@ -142,18 +143,23 @@ namespace Tetris.Controllers
                     }
                 }
             }
-            for (int i = 0; i < curRemovedLines; i++)
+
+            for (int i = 1; i <= linesRemoved; i++)
             {
-                score += 10 * (i + 1);
+                score += 50 * i + 100 * i;
+                //The points earned for completing rows grow proportional to the level number
             }
+
+
             linesRemoved += curRemovedLines;
 
-            if (linesRemoved % 5 == 0)
+            if (linesRemoved % 10 == 0)
             {
-                if (Interval > 60)
-                    Interval -= 10;
+                if (Interval > 30)
+                    Interval -= Interval * 25 / 100; //fall 25% faster than the previous level
             }
 
+            
             label1.Text = "Score: " + score;
             label2.Text = "Lines: " + linesRemoved;
         }
