@@ -175,7 +175,7 @@ namespace Tetris
                 MapController.currentShape.ResetShape(3,0);
                 if (MapController.Collide())
                 {
-                    //RecordsController.SaveRecords(playerName);
+                    RecordsController.SaveRecords(playerName);
                     MapController.ClearMap();
                     timer1.Tick -= new EventHandler(update);
                     timer1.Stop();

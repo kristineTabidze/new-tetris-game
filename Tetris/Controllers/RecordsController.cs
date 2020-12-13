@@ -10,7 +10,7 @@ namespace Tetris.Controllers
 {
     public static class RecordsController
     {
-        public static string recordPath = @"C:\Users\sodrk\Desktop\recordsFile.txt";
+        public static string recordPath = @"\recordsFile.txt";
         public static void SaveRecords(string playerName)
         {
             List<string> recordsArray = new List<string>(LoadRecords());
