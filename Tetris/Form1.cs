@@ -47,8 +47,7 @@ namespace Tetris
             MapController.Interval = 500;
             label1.Text = "Score: " + MapController.score;
             label2.Text = "Lines: " + MapController.linesRemoved;
-
-           
+            label4.Text = "Level: " + MapController.level;
 
             timer1.Interval = MapController.Interval;
             timer1.Tick += new EventHandler(update);
@@ -240,6 +239,6 @@ namespace Tetris
             MessageBox.Show(infoString,"Reference");
         }
 
-
+       
     }
 }
