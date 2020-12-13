@@ -40,8 +40,7 @@ namespace Tetris
             MapController.Interval = 300;
             label1.Text = "Score: " + MapController.score;
             label2.Text = "Lines: " + MapController.linesRemoved;
-
-           
+            label4.Text = "Level: " + MapController.level;
 
             timer1.Interval = MapController.Interval;
             timer1.Tick += new EventHandler(update);
@@ -53,9 +52,22 @@ namespace Tetris
 
         private void keyFunc(object sender, KeyEventArgs e)
         {
+
+            if (e.Control && e.KeyCode == Keys.P)
+            {
+                // pause the game
+                timer1.Stop();
+            }
+
+            if (e.Control && e.KeyCode == Keys.G)
+            {
+                // resume the game
+                timer1.Start();
+            }
+
             switch (e.KeyCode)
             {
-                case Keys.C:
+                case Keys.Home:
                     isClickedOnFillBoard = true;
                     break;
                 case Keys.Down: //keyboard down event
@@ -99,6 +111,8 @@ namespace Tetris
                         Invalidate();
                     }
                     break;
+
+                   
             }
 
         }
