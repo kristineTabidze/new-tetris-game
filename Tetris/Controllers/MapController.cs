@@ -134,6 +134,7 @@ namespace Tetris.Controllers
                 if (count == columns)
                 {
                     curRemovedLines++;
+                   
                     for (int k = i; k >= 1; k--)
                     {
                         for (int o = 0; o < columns; o++)
@@ -144,14 +145,12 @@ namespace Tetris.Controllers
                 }
             }
 
-            for (int i = 1; i <= linesRemoved; i++)
+            if (curRemovedLines > 0)
             {
-                score += 50 * i + 100 * i;
-                //The points earned for completing rows grow proportional to the level number
+                linesRemoved += curRemovedLines;
+                if (linesRemoved / 10 + 1 > level) level++;
+                score += level * (curRemovedLines * 100 + (curRemovedLines - 1) * 50); //change score
             }
-
-
-            linesRemoved += curRemovedLines;
 
             if (linesRemoved % 10 == 0 && linesRemoved > 0)
             {

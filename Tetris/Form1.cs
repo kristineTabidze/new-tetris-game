@@ -21,8 +21,8 @@ namespace Tetris
         public Form1()
         {
             InitializeComponent();
-            //if (!File.Exists(RecordsController.recordPath))
-                //File.Create(RecordsController.recordPath);
+            if (!File.Exists(RecordsController.recordPath))
+                File.Create(RecordsController.recordPath);
             playerName = Microsoft.VisualBasic.Interaction.InputBox("Enter your name","User settings","New user ");
             if(playerName == "")
             {
@@ -36,7 +36,7 @@ namespace Tetris
 
         public void Init()
         {
-            //RecordsController.ShowRecords(label3);
+            RecordsController.ShowRecords(label3);
             this.Text = "Tetris: current user - " + playerName;
             MapController.size = 25;
             MapController.score = 0;
@@ -65,7 +65,7 @@ namespace Tetris
                     if (!MapController.IsIntersects())
                     {
                         MapController.ResetArea();
-                        MapController.currentShape.RotateShape();
+                        MapController.currentShape.RotateShapeCcw();
                         MapController.Merge();
                         Invalidate();
                     }
@@ -75,7 +75,7 @@ namespace Tetris
                     if (!MapController.IsIntersects())
                     {
                         MapController.ResetArea();
-                        MapController.currentShape.RotateShape();
+                        MapController.currentShape.RotateShapeCw();
                         MapController.Merge();
                         Invalidate();
                     }
@@ -85,7 +85,7 @@ namespace Tetris
                     if (!MapController.IsIntersects())
                     {
                         MapController.ResetArea();
-                        MapController.currentShape.RotateShape();
+                        MapController.currentShape.RotateShapeCcw();
                         MapController.Merge();
                         Invalidate();
                     }
@@ -147,7 +147,7 @@ namespace Tetris
                 if (!MapController.IsIntersects())
                 {
                     MapController.ResetArea();
-                    MapController.currentShape.RotateShape();
+                    MapController.currentShape.RotateShapeCcw();
                     MapController.Merge();
                     Invalidate();
                 }
@@ -156,10 +156,7 @@ namespace Tetris
         }
 
         //add event on mouse wheel up/down
-
-    
-
-
+        
         private void update(object sender, EventArgs e)
         {
             MapController.ResetArea();
@@ -175,7 +172,7 @@ namespace Tetris
                 MapController.currentShape.ResetShape(3,0);
                 if (MapController.Collide())
                 {
-                    //RecordsController.SaveRecords(playerName);
+                    RecordsController.SaveRecords(playerName);
                     MapController.ClearMap();
                     timer1.Tick -= new EventHandler(update);
                     timer1.Stop();

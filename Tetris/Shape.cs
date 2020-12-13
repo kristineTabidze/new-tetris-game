@@ -8,9 +8,6 @@ namespace Tetris
 {
     public class Shape
     {
-
-     
-
         public int x;
         public int y;
         public int[,] matrix;
@@ -115,7 +112,33 @@ namespace Tetris
             return _matrix;
         }
 
-        public void RotateShape()
+        public void RotateShapeCw()
+        {
+            int[,] tempMatrix = new int[sizeMatrix, sizeMatrix];
+            for (int i = 0; i < sizeMatrix; i++)
+            {
+                for (int j = 0; j < sizeMatrix; j++)
+                {
+                    tempMatrix[i, j] = matrix[(sizeMatrix - 1) - j, i];
+                }
+            }
+            matrix = tempMatrix;
+            int offset1 = (8 - (x + sizeMatrix));
+            if (offset1 < 0)
+            {
+                for (int i = 0; i < Math.Abs(offset1); i++)
+                    MoveLeft();
+            }
+
+            if (x < 0)
+            {
+                for (int i = 0; i < Math.Abs(x) + 1; i++)
+                    MoveRight();
+            }
+
+        }
+
+        public void RotateShapeCcw()
         {
             int[,] tempMatrix = new int[sizeMatrix,sizeMatrix];
             for(int i = 0; i < sizeMatrix; i++)
@@ -138,7 +161,6 @@ namespace Tetris
                 for (int i = 0; i < Math.Abs(x)+1; i++)
                     MoveRight();
             }
-
         }
 
         public void MoveDown()
