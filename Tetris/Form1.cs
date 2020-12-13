@@ -44,7 +44,7 @@ namespace Tetris
             MapController.score = 0;
             MapController.linesRemoved = 0;
             MapController.currentShape = new Shape(3, 0);
-            MapController.Interval = 300;
+            MapController.Interval = 500;
             label1.Text = "Score: " + MapController.score;
             label2.Text = "Lines: " + MapController.linesRemoved;
 
@@ -220,8 +220,8 @@ namespace Tetris
         {
             string infoString = "";
             infoString = "To move the block use left/right arrow keys .\n";
+            infoString += "To rotate the block use up/down arrow keys .\n";
             infoString += "To accelerate use space bar .\n";
-            infoString += "To rotate use 'A'.\n";
             MessageBox.Show(infoString,"Reference");
         }
 

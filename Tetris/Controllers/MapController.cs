@@ -125,7 +125,7 @@ namespace Tetris.Controllers
 
         public static void SliceMap(Label label1,Label label2)
         {
-            Task.Delay(1000).Wait();
+           //// Task.Delay(1000).Wait();
             int count = 0;
             int curRemovedLines = 0;
             for (int i = 0; i < rows; i++)
@@ -268,9 +268,10 @@ namespace Tetris.Controllers
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    if (map[i,j] == 0 )
+                    if (map[i,j] == 0)
                     {
                         map[i, j] = 8;
+                        e.FillRectangle(Brushes.Pink, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                 }
             }
