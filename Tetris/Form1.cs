@@ -11,6 +11,9 @@ namespace Tetris
         
         string playerName;
         bool isClickedOnFillBoard = false;
+        bool handled = false;
+
+
 
 
         public Form1()
@@ -52,6 +55,8 @@ namespace Tetris
 
         private void keyFunc(object sender, KeyEventArgs e)
         {
+
+            bool handled = true;
 
             if (e.Control && e.KeyCode == Keys.P)
             {
@@ -229,11 +234,26 @@ namespace Tetris
             infoString = "To move the block use left/right arrow keys\n";
             infoString += "To rotate the block use up/down arrow keys\n";
             infoString += "To accelerate the block use spacebar\n";
-            MessageBox.Show(infoString,"Reference");
+            MessageBox.Show(infoString,"How to play");
         }
+
+        private void onClickAboutGame(object sender, EventArgs e)
+        {
+            string infoString = "";
+            infoString = "This is a TETRIS game by:\n";
+            infoString += "Ioseb Gejadze / 823459813 \n";
+            infoString += "Kristine Tabidze / 823377042 \n";
+            MessageBox.Show(infoString, "About");
+        }
+
 
         private void OnPauseButtonClick(object sender, EventArgs e)
         {
+            if (handled)
+            {
+                handled = false;
+                return;
+            }
             var pressedButton = sender as Button;
             if (timer1.Enabled)
             {
@@ -249,10 +269,23 @@ namespace Tetris
 
         private void OnRestartButtonClick(object sender, EventArgs e)
         {
+            if (handled)
+            {
+                handled = false;
+                return;
+            }
+
             timer1.Tick -= new EventHandler(update);
-            timer1.Stop();
-            MapController.ClearMap();
-            Init();
+                timer1.Stop();
+                MapController.ClearMap();
+                Init();
+            
+           
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
