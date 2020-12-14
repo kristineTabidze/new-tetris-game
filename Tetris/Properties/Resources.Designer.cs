@@ -79,5 +79,15 @@ namespace Tetris.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap put_you_your_logo_or_your_image_into_a_tetris_video_game1 {
+            get {
+                object obj = ResourceManager.GetObject("put-you-your-logo-or-your-image-into-a-tetris-video-game1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
