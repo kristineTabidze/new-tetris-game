@@ -240,6 +240,11 @@ namespace Tetris
             infoString = "To move the block use left/right arrow keys\n";
             infoString += "To rotate the block use up/down arrow keys\n";
             infoString += "To accelerate the block use spacebar\n";
+            infoString = "To restart the game use ctrl + N \n";
+            infoString += "To pause game use ctrl + P\n";
+            infoString += "To resume game use ctrl + G\n";
+            infoString += "To start a new game use ctrl + N\n";
+            infoString += "To exit game use E \n";
             MessageBox.Show(infoString,"How to play");
         }
 
