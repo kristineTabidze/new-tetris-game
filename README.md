@@ -1,2 +1,0 @@
-# Tetris c#
- c# tetris
