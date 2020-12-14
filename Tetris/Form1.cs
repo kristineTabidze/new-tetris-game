@@ -105,6 +105,11 @@ namespace Tetris
                         Invalidate();
                     }
                     break;
+
+                    
+                case Keys.E:
+                    Application.Exit();
+                    break;
                 case Keys.Space:
                     timer1.Interval = 10;
                     break;
@@ -283,6 +288,11 @@ namespace Tetris
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void onExitButtonClick(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
     }
