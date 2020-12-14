@@ -12,6 +12,10 @@ kappa|450
 dd|200
 q|40250
 k|5300
-New user |246000
 Ikiki|30500
 sddsds|0
+Anonymous|1150
+ss|0
+aa|1250
+New user |4087550
+ll|0

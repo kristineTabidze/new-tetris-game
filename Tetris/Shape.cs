@@ -16,8 +16,9 @@ namespace Tetris
         public int sizeNextMatrix;
 
         public int[,] IBlock = new int[4, 4]{
-            {1,1,1,1  },
+
             {0,0,0,0  },
+            {1,1,1,1  },
             {0,0,0,0  },
             {0,0,0,0  },
         };
@@ -30,16 +31,15 @@ namespace Tetris
         };
 
         public int[,] ZBlock = new int[3, 3]{
-          
             {4,4,0 },
             {0,4,4 },
             {0,0,0 },
         };
 
         public int[,] TBlock = new int[3, 3]{
+            {0,0,0 },
             {3,3,3 },
             {0,3,0 },
-            {0,0,0 },
         };
 
        
@@ -48,16 +48,18 @@ namespace Tetris
             {5,5 },
         };
 
-        public int[,] JBlock = new int[3, 3]{
-            {6,0,0 },
-            {6,6,6},
-            {0,0,0 },
+        public int[,] JBlock = new int[4, 4]{
+            {0,0,0,0 },
+            {0,6,0,0 },
+            {0,6,6,6 },
+            {0,0,0,0 },
         };
 
-        public int[,] LBlock = new int[3, 3]{
-            {0,0,7 },
-            {7,7,7 },
-            {0,0,0 },
+        public int[,] LBlock = new int[4, 4]{
+            {0,0,0,0 },
+            {0,0,7,0 },
+            {7,7,7,0 },
+            {0,0,0,0 },
         };
 
 

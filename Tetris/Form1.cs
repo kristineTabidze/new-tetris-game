@@ -7,14 +7,10 @@ namespace Tetris
 {
     public partial class Form1 : Form
     {
-        
-        
+        Random rand = new Random();
         string playerName;
         bool isClickedOnFillBoard = false;
         bool handled = false;
-
-
-
 
         public Form1()
         {
@@ -39,7 +35,8 @@ namespace Tetris
             MapController.size = 25;
             MapController.score = 0;
             MapController.linesRemoved = 0;
-            MapController.currentShape = new Shape(3, 0);
+            MapController.level = 1;
+            MapController.currentShape = new Shape(rand.Next(0,7), 0);
             MapController.Interval = 300;
             label1.Text = "Score: " + MapController.score;
             label2.Text = "Lines: " + MapController.linesRemoved;
@@ -49,7 +46,6 @@ namespace Tetris
             timer1.Tick += new EventHandler(update);
             timer1.Start();
             
-
             Invalidate();
         }
 
@@ -148,21 +144,7 @@ namespace Tetris
                     }
                     break;
             }
-
-            if (e.Delta > 0 || e.Delta < 0) //mouse wheel up  /down
-            {
-                if (!MapController.IsIntersects())
-                {
-                    MapController.ResetArea();
-                    MapController.currentShape.RotateShapeCcw();
-                    MapController.Merge();
-                    Invalidate();
-                }
-            }
-
         }
-
-        //add event on mouse wheel up/down
         
         private void update(object sender, EventArgs e)
         {
@@ -174,9 +156,9 @@ namespace Tetris
             else
             {
                 MapController.Merge();
-                MapController.SliceMap(label1,label2);
+                MapController.SliceMap(label1,label2,label4);
                 timer1.Interval = MapController.Interval;
-                MapController.currentShape.ResetShape(3,0);
+                MapController.currentShape.ResetShape(rand.Next(0,7),0);
                 if (MapController.Collide())
                 {
                     RecordsController.SaveRecords(playerName);
@@ -287,5 +269,6 @@ namespace Tetris
         {
 
         }
+
     }
 }

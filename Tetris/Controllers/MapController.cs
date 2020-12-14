@@ -12,8 +12,8 @@ namespace Tetris.Controllers
     {
         public static Shape currentShape;
         public static int size;
-        private static int rows = 18;
-        private static int columns = 10;
+        private static readonly int rows = 18;
+        private static readonly int columns = 10;
         public static int[,] map = new int[rows, columns];
         public static int linesRemoved;
         public static int score;
@@ -123,10 +123,9 @@ namespace Tetris.Controllers
             }
         }
 
-        public static void SliceMap(Label label1,Label label2)
+        public static void SliceMap(Label label1, Label label2, Label label4)
         {
-           //// Task.Delay(1000).Wait();
-            int count = 0;
+            int count;
             int curRemovedLines = 0;
             for (int i = 0; i < rows; i++)
             {
@@ -139,9 +138,7 @@ namespace Tetris.Controllers
                 }
                 if (count == columns)
                 {
-
-                    curRemovedLines++;
-                   
+                    curRemovedLines++;  
                     for (int k = i; k >= 1; k--)
                     {
                         for (int o = 0; o < columns; o++)
@@ -155,19 +152,17 @@ namespace Tetris.Controllers
             if (curRemovedLines > 0)
             {
                 linesRemoved += curRemovedLines;
-                if (linesRemoved / 10 + 1 > level) level++;
                 score += level * (curRemovedLines * 100 + (curRemovedLines - 1) * 50); //change score
-            }
-
-            if (linesRemoved % 10 == 0 && linesRemoved > 0)
-            {
-                if (Interval > 30)
+                if (linesRemoved / 10 + 1 > level)
+                {
+                    level = linesRemoved/10+1;
                     Interval -= Interval * 25 / 100; //fall 25% faster than the previous level
+                }
             }
-
             
             label1.Text = "Score: " + score;
             label2.Text = "Lines: " + linesRemoved;
+            label4.Text = "Level: " + level;
         }
 
         public static bool IsIntersects()
