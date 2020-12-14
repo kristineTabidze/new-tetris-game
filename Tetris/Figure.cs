@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tetris
 {
-    public class Shape
+    public class Figure
     {
         public int x;
         public int y;
@@ -63,7 +63,7 @@ namespace Tetris
         };
 
 
-        public Shape(int _x,int _y)
+        public Figure(int _x,int _y)
         {
             x = _x;
             y = _y;
@@ -73,7 +73,7 @@ namespace Tetris
             sizeNextMatrix = (int)Math.Sqrt(nextMatrix.Length);
         }
 
-        public int GetShapeType()
+        public int GetFigureType()
         {
             int typeInt = 0;
             for(int i=0; i < sizeMatrix; i++)
@@ -90,7 +90,7 @@ namespace Tetris
             return typeInt;
         }
 
-        public void ResetShape(int _x, int _y)
+        public void ResetFigure(int _x, int _y)
         {
             x = _x;
             y = _y;
@@ -131,7 +131,7 @@ namespace Tetris
             return _matrix;
         }
 
-        public void RotateShapeCw()
+        public void RotateFigureCw()
         {
             int[,] tempMatrix = new int[sizeMatrix, sizeMatrix];
             for (int i = 0; i < sizeMatrix; i++)
@@ -157,7 +157,7 @@ namespace Tetris
 
         }
 
-        public void RotateShapeCcw()
+        public void RotateFigureCcw()
         {
             int[,] tempMatrix = new int[sizeMatrix,sizeMatrix];
             for(int i = 0; i < sizeMatrix; i++)

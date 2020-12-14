@@ -7,50 +7,49 @@ namespace Tetris
 {
     public partial class Form1 : Form
     {
-        Random rand = new Random();
-        string playerName;
+        readonly Random rand = new Random();
+        readonly string playerName;
         bool isClickedOnFillBoard = false;
         bool handled = false;
 
         public Form1()
         {
             InitializeComponent();
-            if (!File.Exists(RecordsController.scoresRecordsPath))
-                File.Create(RecordsController.scoresRecordsPath);
-            playerName = Microsoft.VisualBasic.Interaction.InputBox("Enter your name","User settings","New user ");
+            if (!File.Exists(UserDataController.scoresRecordsPath))
+                File.Create(UserDataController.scoresRecordsPath);
+            playerName = Microsoft.VisualBasic.Interaction.InputBox("Please, enter your name","User settings","New user ");
             if(playerName == "")
             {
                 playerName = "Anonymous";
             }
-            this.KeyUp += new KeyEventHandler(keyFunc);
-            this.MouseClick += new MouseEventHandler(mouseFunction);
+            this.KeyUp += new KeyEventHandler(KeyFunc);
 
             Init();
         }
 
         public void Init()
         {
-            RecordsController.ShowScoreRecords(label3);
+            UserDataController.ShowScoreRecords(label3);
             this.Text = "Tetris: current user - " + playerName;
-            MapController.size = 25;
-            MapController.score = 0;
-            MapController.linesRemoved = 0;
-            MapController.level = 1;
-            MapController.currentShape = new Shape(rand.Next(0,7), 0);
-            MapController.Interval = 300;
-            label1.Text = "Score: " + MapController.score;
-            label2.Text = "Lines: " + MapController.linesRemoved;
-            label4.Text = "Level: " + MapController.level;
+            BoardController.size = 25;
+            BoardController.score = 0;
+            BoardController.linesRemoved = 0;
+            BoardController.level = 1;
+            BoardController.currentFigure = new Figure(rand.Next(0,7), 0);
+            BoardController.Interval = 300;
+            label1.Text = "Score: " + BoardController.score;
+            label2.Text = "Lines: " + BoardController.linesRemoved;
+            label4.Text = "Level: " + BoardController.level;
 
-            timer1.Interval = MapController.Interval;
-            timer1.Tick += new EventHandler(update);
+            timer1.Interval = BoardController.Interval;
+            timer1.Tick += new EventHandler(Update);
             timer1.Start();
             
             Invalidate();
 
         }
 
-        private void keyFunc(object sender, KeyEventArgs e)
+        private void KeyFunc(object sender, KeyEventArgs e)
         {
 
             bool handled = true;
@@ -76,9 +75,9 @@ namespace Tetris
             if (e.Control && e.KeyCode == Keys.N)
             {
                 // start new game
-                timer1.Tick -= new EventHandler(update);
+                timer1.Tick -= new EventHandler(Update);
                 timer1.Stop();
-                MapController.ClearMap();
+                BoardController.ClearBoard();
                 Init();
             }
 
@@ -89,21 +88,21 @@ namespace Tetris
                     break;
                 case Keys.Down: //keyboard down event
 
-                    if (!MapController.IsIntersects())
+                    if (!BoardController.IsIntersects())
                     {
-                        MapController.ResetArea();
-                        MapController.currentShape.RotateShapeCw();
-                        MapController.Merge();
+                        BoardController.ResetArea();
+                        BoardController.currentFigure.RotateFigureCw();
+                        BoardController.Merge();
                         Invalidate();
                     }
                     break;
                 case Keys.Up: //keyboard up event
 
-                    if (!MapController.IsIntersects())
+                    if (!BoardController.IsIntersects())
                     {
-                        MapController.ResetArea();
-                        MapController.currentShape.RotateShapeCcw();
-                        MapController.Merge();
+                        BoardController.ResetArea();
+                        BoardController.currentFigure.RotateFigureCcw();
+                        BoardController.Merge();
                         Invalidate();
                     }
                     break;
@@ -114,93 +113,62 @@ namespace Tetris
                     Application.Exit();
                     break;
                 case Keys.Right:
-                    if (!MapController.CollideHor(1))
+                    if (!BoardController.CollideHor(1))
                     {
-                        MapController.ResetArea();
-                        MapController.currentShape.MoveRight();
-                        MapController.Merge();
+                        BoardController.ResetArea();
+                        BoardController.currentFigure.MoveRight();
+                        BoardController.Merge();
                         Invalidate();
                     }
                     break;
                 case Keys.Left:
-                    if (!MapController.CollideHor(-1))
+                    if (!BoardController.CollideHor(-1))
                     {
-                        MapController.ResetArea();
-                        MapController.currentShape.MoveLeft();
-                        MapController.Merge();
-                        Invalidate();
-                    }
-                    break;
-
-                   
-            }
-
-        }
-
-        // add events after click mouse right/left button
-
-        private void mouseFunction(object sender, MouseEventArgs e)
-        {
-            switch (e.Button)
-            {
-                
-                case MouseButtons.Right:
-                    if (!MapController.CollideHor(1))
-                    {
-                        MapController.ResetArea();
-                        MapController.currentShape.MoveRight();
-                        MapController.Merge();
-                        Invalidate();
-                    }
-                    break;
-                case MouseButtons.Left:
-                    if (!MapController.CollideHor(-1))
-                    {
-                        MapController.ResetArea();
-                        MapController.currentShape.MoveLeft();
-                        MapController.Merge();
+                        BoardController.ResetArea();
+                        BoardController.currentFigure.MoveLeft();
+                        BoardController.Merge();
                         Invalidate();
                     }
                     break;
             }
         }
         
-        private void update(object sender, EventArgs e)
+        private void Update(object sender, EventArgs e)
         {
-            MapController.ResetArea();
-            if (!MapController.Collide())
+            BoardController.ResetArea();
+            if (!BoardController.Collide())
             {
-                MapController.currentShape.MoveDown();
+                BoardController.currentFigure.MoveDown();
             }
             else
             {
-                MapController.Merge();
-                MapController.SliceMap(label1,label2,label4);
-                timer1.Interval = MapController.Interval;
-                MapController.currentShape.ResetShape(rand.Next(0,7),0);
-                if (MapController.Collide())
+                BoardController.Merge();
+                BoardController.SliceBoard(label1,label2,label4);
+                timer1.Interval = BoardController.Interval;
+                BoardController.currentFigure.ResetFigure(rand.Next(0,7),0);
+                if (BoardController.Collide())
                 {
-                    RecordsController.SaveRecords(playerName);
-                    MapController.ClearMap();
-                    timer1.Tick -= new EventHandler(update);
+                    UserDataController.SaveRecords(playerName);
+                    BoardController.ClearBoard();
+                    timer1.Tick -= new EventHandler(Update);
                     timer1.Stop();
-                    MessageBox.Show("Your score: " + MapController.score);
+                    MessageBox.Show("Your score: " + BoardController.score);
                     Init();
                 }
             }
-            MapController.Merge();
+            BoardController.Merge();
             Invalidate();
         }
 
         private void OnPaint(object sender, PaintEventArgs e)
         {
-            MapController.DrawGrid(e.Graphics);
-            MapController.DrawMap(e.Graphics);
-            MapController.ShowNextShape(e.Graphics);
+            BoardController.DrawGrid(e.Graphics);
+            BoardController.DrawBoard(e.Graphics);
+            BoardController.ShowNextFigure(e.Graphics);
             if (isClickedOnFillBoard)
             {
                 
-                MapController.FillArea(e.Graphics);
+                BoardController.FillArea(e.Graphics);
                 isClickedOnFillBoard = false;
             }
         }
@@ -226,32 +194,29 @@ namespace Tetris
 
         private void OnStripRestartClick(object sender, EventArgs e)
         {
-            timer1.Tick -= new EventHandler(update);
+            timer1.Tick -= new EventHandler(Update);
             timer1.Stop();
-            MapController.ClearMap();
+            BoardController.ClearBoard();
             Init();
             
         }
 
-
         private void OnStripReferenceClick(object sender, EventArgs e)
         {
-            string infoString = "";
-            infoString = "To move the block use left/right arrow keys\n";
+            string infoString = "To move the block use left/right arrow keys\n";
             infoString += "To rotate the block use up/down arrow keys\n";
             infoString += "To accelerate the block use spacebar\n";
-            infoString = "To restart the game use ctrl + N \n";
+            infoString += "To restart the game use ctrl + N \n";
             infoString += "To pause game use ctrl + P\n";
             infoString += "To resume game use ctrl + G\n";
-            infoString += "To start a new game use ctrl + N\n";
             infoString += "To exit game use E \n";
+            infoString += "\n\n\nIf you're looking for the cheat, it's 'home' key.";
             MessageBox.Show(infoString,"How to play");
         }
 
-        private void onClickAboutGame(object sender, EventArgs e)
+        private void OnClickAboutGame(object sender, EventArgs e)
         {
-            string infoString = "";
-            infoString = "This is a TETRIS game by:\n";
+            string infoString = "This is a TETRIS game by:\n";
             infoString += "Ioseb Gejadze / 823459813 \n";
             infoString += "Kristine Tabidze / 823377042 \n";
             MessageBox.Show(infoString, "About");
@@ -286,9 +251,9 @@ namespace Tetris
                 return;
             }
 
-            timer1.Tick -= new EventHandler(update);
+            timer1.Tick -= new EventHandler(Update);
                 timer1.Stop();
-                MapController.ClearMap();
+                BoardController.ClearBoard();
                 Init();
             
            
@@ -301,17 +266,17 @@ namespace Tetris
 
         private void OnSaveGameClick(object sender, EventArgs e)
         {
-            RecordsController.SaveGame(playerName);
+            UserDataController.SaveGame(playerName);
             MessageBox.Show("Saved!", "Save Game");
         }
 
         private void OnLoadGameClick(object sender, EventArgs e)
         {
-            MapController.currentShape.ResetShape(rand.Next(0, 7), 0);
-            MapController.map = RecordsController.LoadGame(playerName);
+            BoardController.currentFigure.ResetFigure(rand.Next(0, 7), 0);
+            BoardController.board = UserDataController.LoadGame(playerName);
         }
 
-        private void onExitButtonClick(object sender, EventArgs e)
+        private void OnExitButtonClick(object sender, EventArgs e)
         {
             Application.Exit();
         }

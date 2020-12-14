@@ -8,49 +8,49 @@ using System.Windows.Forms;
 
 namespace Tetris
 {
-    public static class MapController
+    public static class BoardController
     {
-        public static Shape currentShape;
+        public static Figure currentFigure;
         public static int size;
         public static readonly int rows = 18;
         public static readonly int columns = 10;
-        public static int[,] map = new int[rows, columns];
+        public static int[,] board = new int[rows, columns];
         public static int linesRemoved;
         public static int score;
         public static int Interval;
         public static int level;
 
-        public static void ShowNextShape(Graphics e)
+        public static void ShowNextFigure(Graphics e)
         {
-            for (int i = 0; i < currentShape.sizeNextMatrix; i++)
+            for (int i = 0; i < currentFigure.sizeNextMatrix; i++)
             {
-                for (int j = 0; j < currentShape.sizeNextMatrix; j++)
+                for (int j = 0; j < currentFigure.sizeNextMatrix; j++)
                 {
-                    if (currentShape.nextMatrix[i, j] == 1)
+                    if (currentFigure.nextMatrix[i, j] == 1)
                     {
                         e.FillRectangle(Brushes.Red, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (currentShape.nextMatrix[i, j] == 2)
+                    if (currentFigure.nextMatrix[i, j] == 2)
                     {
                         e.FillRectangle(Brushes.Yellow, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (currentShape.nextMatrix[i, j] == 3)
+                    if (currentFigure.nextMatrix[i, j] == 3)
                     {
                         e.FillRectangle(Brushes.Green, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (currentShape.nextMatrix[i, j] == 4)
+                    if (currentFigure.nextMatrix[i, j] == 4)
                     {
                         e.FillRectangle(Brushes.Blue, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (currentShape.nextMatrix[i, j] == 5)
+                    if (currentFigure.nextMatrix[i, j] == 5)
                     {
                         e.FillRectangle(Brushes.Purple, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (currentShape.nextMatrix[i, j] == 6)
+                    if (currentFigure.nextMatrix[i, j] == 6)
                     {
                         e.FillRectangle(Brushes.Aquamarine, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (currentShape.nextMatrix[i, j] == 7)
+                    if (currentFigure.nextMatrix[i, j] == 7)
                     {
                         e.FillRectangle(Brushes.LimeGreen, new Rectangle(330 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
@@ -58,54 +58,54 @@ namespace Tetris
             }
         }
 
-        public static void ClearMap()
+        public static void ClearBoard()
         {
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    map[i, j] = 0;
+                    board[i, j] = 0;
                 }
             }
         }
 
-        public static void DrawMap(Graphics e)
+        public static void DrawBoard(Graphics e)
         {
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    if (map[i, j] == 1)
+                    if (board[i, j] == 1)
                     {
                         e.FillRectangle(Brushes.Red, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 2)
+                    if (board[i, j] == 2)
                     {
                         e.FillRectangle(Brushes.Yellow, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 3)
+                    if (board[i, j] == 3)
                     {
                         e.FillRectangle(Brushes.Green, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 4)
+                    if (board[i, j] == 4)
                     {
                         e.FillRectangle(Brushes.Blue, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 5)
+                    if (board[i, j] == 5)
                     {
                         e.FillRectangle(Brushes.Purple, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 6)
+                    if (board[i, j] == 6)
                     {
                         e.FillRectangle(Brushes.Aquamarine, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 7)
+                    if (board[i, j] == 7)
                     {
                         e.FillRectangle(Brushes.LimeGreen, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
-                    if (map[i, j] == 8) //if pressed c keyboard
+                    if (board[i, j] == 8) //if pressed c keyboard
                     {
-                        e.FillRectangle(Brushes.LimeGreen, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
+                        e.FillRectangle(Brushes.Pink, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                 }
             }
@@ -123,7 +123,7 @@ namespace Tetris
             }
         }
 
-        public static void SliceMap(Label label1, Label label2, Label label4)
+        public static void SliceBoard(Label label1, Label label2, Label label4)
         {
             int count;
             int curRemovedLines = 0;
@@ -133,7 +133,7 @@ namespace Tetris
 
                 for (int j = 0; j < columns; j++)
                 {
-                    if (map[i, j] != 0)
+                    if (board[i, j] != 0)
                         count++;
                 }
                 if (count == columns)
@@ -143,7 +143,7 @@ namespace Tetris
                     {
                         for (int o = 0; o < columns; o++)
                         {
-                            map[k, o] = map[k - 1, o];
+                            board[k, o] = board[k - 1, o];
                         }
                     }
                 }
@@ -167,13 +167,13 @@ namespace Tetris
 
         public static bool IsIntersects()
         {
-            for (int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
+            for (int i = currentFigure.y; i < currentFigure.y + currentFigure.sizeMatrix; i++)
             {
-                for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
+                for (int j = currentFigure.x; j < currentFigure.x + currentFigure.sizeMatrix; j++)
                 {
                     if (j >= 0 && j < columns)
                     {
-                        if (map[i, j] != 0 && currentShape.matrix[i - currentShape.y, j - currentShape.x] == 0)
+                        if (board[i, j] != 0 && currentFigure.matrix[i - currentFigure.y, j - currentFigure.x] == 0)
                             return true;
                     }
                 }
@@ -183,27 +183,27 @@ namespace Tetris
 
         public static void Merge()
         {
-            for (int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
+            for (int i = currentFigure.y; i < currentFigure.y + currentFigure.sizeMatrix; i++)
             {
-                for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
+                for (int j = currentFigure.x; j < currentFigure.x + currentFigure.sizeMatrix; j++)
                 {
-                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
-                        map[i, j] = currentShape.matrix[i - currentShape.y, j - currentShape.x];
+                    if (currentFigure.matrix[i - currentFigure.y, j - currentFigure.x] != 0)
+                        board[i, j] = currentFigure.matrix[i - currentFigure.y, j - currentFigure.x];
                 }
             }
         }
 
         public static bool Collide()
         {
-            for (int i = currentShape.y + currentShape.sizeMatrix - 1; i >= currentShape.y; i--)
+            for (int i = currentFigure.y + currentFigure.sizeMatrix - 1; i >= currentFigure.y; i--)
             {
-                for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
+                for (int j = currentFigure.x; j < currentFigure.x + currentFigure.sizeMatrix; j++)
                 {
-                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
+                    if (currentFigure.matrix[i - currentFigure.y, j - currentFigure.x] != 0)
                     {
                         if (i + 1 == rows)
                             return true;
-                        if (map[i + 1, j] != 0)
+                        if (board[i + 1, j] != 0)
                         {
                             return true;
                         }
@@ -215,22 +215,22 @@ namespace Tetris
 
         public static bool CollideHor(int dir)
         {
-            for (int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
+            for (int i = currentFigure.y; i < currentFigure.y + currentFigure.sizeMatrix; i++)
             {
-                for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
+                for (int j = currentFigure.x; j < currentFigure.x + currentFigure.sizeMatrix; j++)
                 {
-                    if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
+                    if (currentFigure.matrix[i - currentFigure.y, j - currentFigure.x] != 0)
                     {
                         if (j + 1 * dir > columns - 1 || j + 1 * dir < 0)
                             return true;
 
-                        if (map[i, j + 1 * dir] != 0)
+                        if (board[i, j + 1 * dir] != 0)
                         {
-                            if (j - currentShape.x + 1 * dir >= currentShape.sizeMatrix || j - currentShape.x + 1 * dir < 0)
+                            if (j - currentFigure.x + 1 * dir >= currentFigure.sizeMatrix || j - currentFigure.x + 1 * dir < 0)
                             {
                                 return true;
                             }
-                            if (currentShape.matrix[i - currentShape.y, j - currentShape.x + 1 * dir] == 0)
+                            if (currentFigure.matrix[i - currentFigure.y, j - currentFigure.x + 1 * dir] == 0)
                                 return true;
                         }
                     }
@@ -241,15 +241,15 @@ namespace Tetris
 
         public static void ResetArea()
         {
-            for (int i = currentShape.y; i < currentShape.y + currentShape.sizeMatrix; i++)
+            for (int i = currentFigure.y; i < currentFigure.y + currentFigure.sizeMatrix; i++)
             {
-                for (int j = currentShape.x; j < currentShape.x + currentShape.sizeMatrix; j++)
+                for (int j = currentFigure.x; j < currentFigure.x + currentFigure.sizeMatrix; j++)
                 {
                     if (i >= 0 && j >= 0 && i < rows && j < columns)
                     {
-                        if (currentShape.matrix[i - currentShape.y, j - currentShape.x] != 0)
+                        if (currentFigure.matrix[i - currentFigure.y, j - currentFigure.x] != 0)
                         {
-                            map[i, j] = 0;
+                            board[i, j] = 0;
                         }
                     }
                 }
@@ -263,9 +263,9 @@ namespace Tetris
             {
                 for (int j = 0; j < columns; j++)
                 {
-                    if (map[i,j] == 0)
+                    if (board[i,j] == 0)
                     {
-                        map[i, j] = 8;
+                        board[i, j] = 8;
                         e.FillRectangle(Brushes.Pink, new Rectangle(50 + j * (size) + 1, 50 + i * (size) + 1, size - 1, size - 1));
                     }
                 }

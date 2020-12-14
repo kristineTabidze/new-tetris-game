@@ -4,9 +4,13 @@ Kongo|0
 King Kong|0
 San Diego|0
 Diego|0
-aaa|0
 kkk|0
 baba|0
 aa|0
 იკო|0
 bbb|0
+asdasa|3100
+asdas|3870400
+asd|0
+aaa|200
+Ikoseb|1200

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Tetris
 {
-    public static class RecordsController
+    public static class UserDataController
     {
         public static string scoresRecordsPath = @"..\..\Resources\recordsFile.txt";
         public static string gameRecordsDirectory = @"..\..\Resources\Saved-Games\";
@@ -21,15 +21,15 @@ namespace Tetris
                 if (playerName == recordsArray[i].UserName)
                 {
                     isNameExistsInRecords = true;
-                    if (MapController.score > recordsArray[i].Score)
+                    if (BoardController.score > recordsArray[i].Score)
                     {
                         recordsArray.RemoveAt(i);
-                        recordsArray.Add(ScoreRecordItem.StringToRecordItem(playerName + "|" + MapController.score));
+                        recordsArray.Add(ScoreRecordItem.StringToRecordItem(playerName + "|" + BoardController.score));
                     }
                 }
             }
             if (!isNameExistsInRecords)
-            recordsArray.Add(ScoreRecordItem.StringToRecordItem(playerName + "|" + MapController.score));
+            recordsArray.Add(ScoreRecordItem.StringToRecordItem(playerName + "|" + BoardController.score));
             List<string> recordsStringArray = new List<string>();
             foreach(var rec in recordsArray)
             {
@@ -43,29 +43,29 @@ namespace Tetris
             string path = gameRecordsDirectory + playerName + ".txt";
             FileStream fs = File.Create(path);
 
-            int[,] currMap = MapController.map.Clone() as int[,];
-            int x = MapController.currentShape.x;
-            int y = MapController.currentShape.y;
-            int size = MapController.currentShape.sizeMatrix;
+            int[,] currBoard = BoardController.board.Clone() as int[,];
+            int x = BoardController.currentFigure.x;
+            int y = BoardController.currentFigure.y;
+            int size = BoardController.currentFigure.sizeMatrix;
 
             for (int i = 0; i < size; i++)
             {
                 for (int j = 0; j < size; j++)
                 {
-                    if (y + i >= MapController.rows || x + j >= MapController.columns) break;
-                    if (currMap[y + i, x + j] == MapController.currentShape.GetShapeType())
+                    if (y + i >= BoardController.rows || x + j >= BoardController.columns) break;
+                    if (currBoard[y + i, x + j] == BoardController.currentFigure.GetFigureType())
                     {
-                        currMap[y + i, x + j] = 0;
+                        currBoard[y + i, x + j] = 0;
                     }
                 }
             }
 
             string data = "";
-            for(int i=0; i<MapController.rows; i++)
+            for(int i=0; i<BoardController.rows; i++)
             {
-                for(int j=0; j<MapController.columns; j++)
+                for(int j=0; j<BoardController.columns; j++)
                 {
-                    data += currMap[i, j];
+                    data += currBoard[i, j];
                 }
                 data += "\n";
             }
@@ -89,18 +89,18 @@ namespace Tetris
         public static int[,] LoadGame(string playerName)
         {
             string path = gameRecordsDirectory + playerName + ".txt";
-            if (!File.Exists(path)) return new int[MapController.rows, MapController.columns];
+            if (!File.Exists(path)) return new int[BoardController.rows, BoardController.columns];
             string[] recordsStringArray = File.ReadAllLines(path);
-            int[,] loadedMap = new int[MapController.rows, MapController.columns];
-            for(int i=0; i<MapController.rows; i++)
+            int[,] loadedBoard = new int[BoardController.rows, BoardController.columns];
+            for(int i=0; i<BoardController.rows; i++)
             {
                 string currLine = recordsStringArray[i];
-                for(int j=0; j<MapController.columns; j++)
+                for(int j=0; j<BoardController.columns; j++)
                 {
-                    loadedMap[i, j] = currLine[j] - '0';
+                    loadedBoard[i, j] = currLine[j] - '0';
                 }
             }
-            return loadedMap;
+            return loadedBoard;
         }
 
         public static void ShowScoreRecords(Label label3)
@@ -119,8 +119,7 @@ namespace Tetris
         }
     }
 
-    //public class GameRecordItem
-
+    //public class ScoreRecordItem
 
     public class ScoreRecordItem : IComparable<ScoreRecordItem>
     {
