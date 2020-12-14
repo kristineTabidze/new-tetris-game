@@ -52,18 +52,21 @@ namespace Tetris
         private void keyFunc(object sender, KeyEventArgs e)
         {
 
+
             bool handled = true;
 
             if (e.Control && e.KeyCode == Keys.P)
             {
                 // pause the game
                 timer1.Stop();
+                pauseToolStripMenuItem.Text = "Continue";
             }
 
             if (e.Control && e.KeyCode == Keys.G)
             {
                 // resume the game
                 timer1.Start();
+                pauseToolStripMenuItem.Text = "Pause";
             }
 
             switch (e.KeyCode)
@@ -189,6 +192,7 @@ namespace Tetris
         private void OnStripPauseClick(object sender, EventArgs e)
         {
             var pressedButton = sender as ToolStripMenuItem;
+          
             if (timer1.Enabled)
             {
                 pressedButton.Text = "Continue";
@@ -242,7 +246,7 @@ namespace Tetris
                 pressedButton.Text = "Continue";
                 timer1.Stop();
             }
-            else
+            else 
             {
                 pressedButton.Text = "Pause";
                 timer1.Start();
