@@ -73,6 +73,23 @@ namespace Tetris
             sizeNextMatrix = (int)Math.Sqrt(nextMatrix.Length);
         }
 
+        public int GetShapeType()
+        {
+            int typeInt = 0;
+            for(int i=0; i < sizeMatrix; i++)
+            {
+                for (int j = 0; j < sizeMatrix; j++)
+                {
+                    if (matrix[i, j] != 0) { 
+                        typeInt = matrix[i, j];
+                        break;                    
+                    }
+                }
+                if (typeInt != 0) break;
+            }
+            return typeInt;
+        }
+
         public void ResetShape(int _x, int _y)
         {
             x = _x;

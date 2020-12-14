@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using Tetris.Controllers;
+using Tetris;
 
 namespace Tetris
 {
@@ -15,8 +15,8 @@ namespace Tetris
         public Form1()
         {
             InitializeComponent();
-            if (!File.Exists(RecordsController.recordPath))
-                File.Create(RecordsController.recordPath);
+            if (!File.Exists(RecordsController.scoresRecordsPath))
+                File.Create(RecordsController.scoresRecordsPath);
             playerName = Microsoft.VisualBasic.Interaction.InputBox("Enter your name","User settings","New user ");
             if(playerName == "")
             {
@@ -30,7 +30,7 @@ namespace Tetris
 
         public void Init()
         {
-            RecordsController.ShowRecords(label3);
+            RecordsController.ShowScoreRecords(label3);
             this.Text = "Tetris: current user - " + playerName;
             MapController.size = 25;
             MapController.score = 0;
@@ -270,5 +270,16 @@ namespace Tetris
 
         }
 
+        private void OnSaveGameClick(object sender, EventArgs e)
+        {
+            RecordsController.SaveGame(playerName);
+            MessageBox.Show("Saved!", "Save Game");
+        }
+
+        private void OnLoadGameClick(object sender, EventArgs e)
+        {
+            MapController.currentShape.ResetShape(rand.Next(0, 7), 0);
+            MapController.map = RecordsController.LoadGame(playerName);
+        }
     }
 }

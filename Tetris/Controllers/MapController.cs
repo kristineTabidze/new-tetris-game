@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tetris.Controllers
+namespace Tetris
 {
     public static class MapController
     {
         public static Shape currentShape;
         public static int size;
-        private static readonly int rows = 18;
-        private static readonly int columns = 10;
+        public static readonly int rows = 18;
+        public static readonly int columns = 10;
         public static int[,] map = new int[rows, columns];
         public static int linesRemoved;
         public static int score;
