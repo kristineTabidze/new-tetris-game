@@ -47,6 +47,7 @@ namespace Tetris
             timer1.Start();
             
             Invalidate();
+
         }
 
         private void keyFunc(object sender, KeyEventArgs e)
@@ -59,6 +60,8 @@ namespace Tetris
                 // pause the game
                 timer1.Stop();
                 pauseToolStripMenuItem.Text = "Continue";
+                saveToolStripMenuItem.Enabled = true;
+                loadToolStripMenuItem.Enabled = true;
             }
 
             if (e.Control && e.KeyCode == Keys.G)
@@ -66,6 +69,8 @@ namespace Tetris
                 // resume the game
                 timer1.Start();
                 pauseToolStripMenuItem.Text = "Pause";
+                saveToolStripMenuItem.Enabled = false;
+                loadToolStripMenuItem.Enabled = false;
             }
 
             if (e.Control && e.KeyCode == Keys.N)
@@ -207,11 +212,15 @@ namespace Tetris
             {
                 pressedButton.Text = "Continue";
                 timer1.Stop();
+                saveToolStripMenuItem.Enabled = true;
+                loadToolStripMenuItem.Enabled = true;
             }
             else
             {
                 pressedButton.Text = "Pause";
                 timer1.Start();
+                saveToolStripMenuItem.Enabled = false;
+                loadToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -221,6 +230,7 @@ namespace Tetris
             timer1.Stop();
             MapController.ClearMap();
             Init();
+            
         }
 
 
