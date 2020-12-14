@@ -79,15 +79,5 @@ namespace Tetris.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap nicin_deniz_suyunu_icemiyoruz {
-            get {
-                object obj = ResourceManager.GetObject("nicin-deniz-suyunu-icemiyoruz", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
