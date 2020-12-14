@@ -55,6 +55,7 @@ namespace Tetris
 
             bool handled = true;
 
+
             if (e.Control && e.KeyCode == Keys.P)
             {
                 // pause the game
@@ -68,6 +69,16 @@ namespace Tetris
                 timer1.Start();
                 pauseToolStripMenuItem.Text = "Pause";
             }
+
+            if (e.Control && e.KeyCode == Keys.N)
+            {
+                // start new game
+                timer1.Tick -= new EventHandler(update);
+                timer1.Stop();
+                MapController.ClearMap();
+                Init();
+            }
+
 
             switch (e.KeyCode)
             {
