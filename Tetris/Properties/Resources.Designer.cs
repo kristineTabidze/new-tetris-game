@@ -63,9 +63,9 @@ namespace Tetris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap IMG_20201104_224551 {
+        internal static System.Drawing.Bitmap download {
             get {
-                object obj = ResourceManager.GetObject("IMG_20201104_224551", resourceCulture);
+                object obj = ResourceManager.GetObject("download", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Tetris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap put_you_your_logo_or_your_image_into_a_tetris_video_game {
+        internal static System.Drawing.Bitmap download1 {
             get {
-                object obj = ResourceManager.GetObject("put-you-your-logo-or-your-image-into-a-tetris-video-game", resourceCulture);
+                object obj = ResourceManager.GetObject("download1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Tetris.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap put_you_your_logo_or_your_image_into_a_tetris_video_game1 {
+        internal static System.Drawing.Bitmap nicin_deniz_suyunu_icemiyoruz {
             get {
-                object obj = ResourceManager.GetObject("put-you-your-logo-or-your-image-into-a-tetris-video-game1", resourceCulture);
+                object obj = ResourceManager.GetObject("nicin-deniz-suyunu-icemiyoruz", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

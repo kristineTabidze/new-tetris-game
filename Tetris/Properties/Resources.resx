@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="IMG_20201104_224551" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IMG_20201104_224551.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="download1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="put-you-your-logo-or-your-image-into-a-tetris-video-game" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\put-you-your-logo-or-your-image-into-a-tetris-video-game.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="put-you-your-logo-or-your-image-into-a-tetris-video-game1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\icons\put-you-your-logo-or-your-image-into-a-tetris-video-game.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="nicin-deniz-suyunu-icemiyoruz" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\nicin-deniz-suyunu-icemiyoruz.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

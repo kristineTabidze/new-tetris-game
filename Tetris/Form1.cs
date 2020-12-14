@@ -58,12 +58,23 @@ namespace Tetris
             {
                 // pause the game
                 timer1.Stop();
+                pauseToolStripMenuItem.Text = "Continue";
             }
 
             if (e.Control && e.KeyCode == Keys.G)
             {
                 // resume the game
                 timer1.Start();
+                pauseToolStripMenuItem.Text = "Pause";
+            }
+
+            if (e.Control && e.KeyCode == Keys.N)
+            {
+                // start new game
+                timer1.Tick -= new EventHandler(update);
+                timer1.Stop();
+                MapController.ClearMap();
+                Init();
             }
 
             switch (e.KeyCode)
@@ -93,6 +104,9 @@ namespace Tetris
                     break;
                 case Keys.Space:
                     timer1.Interval = 10;
+                    break;
+                case Keys.E:
+                    Application.Exit();
                     break;
                 case Keys.Right:
                     if (!MapController.CollideHor(1))
@@ -280,6 +294,11 @@ namespace Tetris
         {
             MapController.currentShape.ResetShape(rand.Next(0, 7), 0);
             MapController.map = RecordsController.LoadGame(playerName);
+        }
+
+        private void onExitButtonClick(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
